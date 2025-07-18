@@ -1,0 +1,36 @@
+{
+  "name": "goiteems-js-hw-15-http",
+  "version": "1.0.0",
+  "description": "homework by goiteens ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel src/index.html",
+    "build": "parcel build index.html",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DmitroOmelianenko/goiteems-js-hw-15-http.git"
+  },
+  "keywords": [
+    "hw",
+    "hoiteens"
+  ],
+  "author": "Dmitro Omelianenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DmitroOmelianenko/goiteems-js-hw-15-http/issues"
+  },
+  "homepage": "https://github.com/DmitroOmelianenko/goiteems-js-hw-15-http#readme",
+  "dependencies": {
+    "@pnotify/core": "^5.2.0",
+    "lodash.debounce": "^4.0.8",
+    "parcel": "^2.15.4"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "parcel-reporter-clean-dist": "^1.0.4",
+    "posthtml-include": "^2.0.1"
+  }
+}
