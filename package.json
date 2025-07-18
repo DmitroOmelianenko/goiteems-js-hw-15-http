@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/DmitroOmelianenko/goiteems-js-hw-15-http/issues"
   },
-  "homepage": "https://github.com/DmitroOmelianenko/goiteems-js-hw-15-http#readme",
+  "homepage": "https://github.com/DmitroOmelianenko/goiteems-js-hw-15-http",
   "dependencies": {
     "@pnotify/core": "^5.2.0",
     "lodash.debounce": "^4.0.8",
