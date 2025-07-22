@@ -6,8 +6,42 @@
   <title>Country Search</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pnotify/core/dist/PNotify.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pnotify/core/dist/BrightTheme.css" />
-  <link rel="stylesheet" href="./style.css">
 </head>
+<style>
+   body {
+  font-family: sans-serif;
+  background: #f7f7f7;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+#results {
+  list-style: none;
+  padding: 0;
+}
+
+#results li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #eef;
+  border-radius: 5px;
+}
+
+</style>
 <body>
   <div class="container">
     <h1>🔍 Пошук країни</h1>
@@ -16,7 +50,44 @@
 
   </div>
 </body>
-<script type="module" src="./main.js"></script>
+  <script>
+     const input = document.getElementById("search");
+const output = document.getElementById("country-list");
+let timeoutId;
+
+input.addEventListener("input", () => {
+  clearTimeout(timeoutId);
+  const query = input.value.trim();
+  if (!query) return output.innerHTML = "";
+
+  timeoutId = setTimeout(() => {
+    fetch(`https://restcountries.com/v2/name/${query}`)
+      .then(res => res.ok ? res.json() : Promise.reject())
+      .then(data => {
+        output.innerHTML = "";
+
+        if (data.length > 10) {
+          return PNotify.info({ text: "Забагато результатів, уточніть запит." });
+        }
+
+        if (data.length > 1) {
+          output.innerHTML = "<ul>" + data.map(c => `<li>${c.name}</li>`).join("") + "</ul>";
+        } else {
+          const c = data[0];
+          output.innerHTML = `
+            <h2>${c.name}</h2>
+            <p>Столиця: ${c.capital}</p>
+            <p>Населення: ${c.population.toLocaleString()}</p>
+            <p>Мови: ${c.languages.map(l => l.name).join(", ")}</p>
+            <img src="${c.flag}" width="150" />
+          `;
+        }
+      })
+      .catch(() => PNotify.error({ text: "Країну не знайдено." }));
+  }, 500);
+});
+
+  </script>
  <script src="https://cdn.jsdelivr.net/npm/@pnotify/core/dist/PNotify.js"></script>
 
 </html>
